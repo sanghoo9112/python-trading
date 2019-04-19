@@ -21,6 +21,7 @@ instStockChart.SetInputValue(9, ord('1'))
 instStockChart.BlockRequest()
 
 # GetData
+# GetData
 volumes = []
 numData = instStockChart.GetHeaderValue(3)
 for i in range(numData):

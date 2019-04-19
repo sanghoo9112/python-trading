@@ -34,8 +34,11 @@ if __name__ == "__main__":
     instCpCodeMgr = win32com.client.Dispatch("CpUtil.CpCodeMgr")
     codeList = instCpCodeMgr.GetStockListByMarket(1)
     buyList = []
+
+    print("지난 60일간의 평균 거래량이 금일 거래량의 1000% 인 대박주 목록")
     for code in codeList:
         if CheckVolumn(instStockChart, code) == 1:
             buyList.append(code)
-            print(code)
+            name = instCpCodeMgr.CodeToName(code)
+            print("대박주 증권 코드 : "+ code + " || 대박주 증권 이름 : "+  name)
         time.sleep(1)
