@@ -1,11 +1,10 @@
 import win32com.client
 
-
 instMarketEye = win32com.client.Dispatch("CpSysDib.MarketEye")
 
 # SetInputValue
 instMarketEye.SetInputValue(0, (4, 67, 70, 111))
-instMarketEye.SetInputValue(1, 'A003540')
+instMarketEye.SetInputValue(1, 'A035720')
 
 # BlockRequest
 instMarketEye.BlockRequest()
