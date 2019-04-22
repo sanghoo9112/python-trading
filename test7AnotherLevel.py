@@ -12,20 +12,20 @@ def PrintCalList(instMarketEye, code):
     # 97:분기매출액증가율(float)
     # 110:분기부채비율(float)
     instMarketEye.SetInputValue(0, (4, 62, 67, 75, 78, 80, 88, 97, 110))
-    instMarketEye.SetInputValue(1, electCodeList)
+    #instMarketEye.SetInputValue(0, (4, 67, 70, 111))
+    instMarketEye.SetInputValue(1, code)
 
     # BlockRequest
     instMarketEye.BlockRequest()
+    print("현재가(long or float) : ", instMarketEye.GetDataValue(0, 0))
+    print("외국인순매매(long): ", instMarketEye.GetDataValue(1, 0))
+    print("PER(float): ", instMarketEye.GetDataValue(2, 0))
+    print("부채비율(float): ", instMarketEye.GetDataValue(3, 0))
+    print("매출액증가율(float): ", instMarketEye.GetDataValue(4, 0))
+    print("당기순이익(ulonglog) - 단위:원: ", instMarketEye.GetDataValue(5, 0))
+    print("분기매출액증가율(float): ", instMarketEye.GetDataValue(6, 0))
+    print("분기부채비율(float): ", instMarketEye.GetDataValue(7, 0))
 
-    # GetHeaderValue
-    numStock = instMarketEye.GetHeaderValue(2)
-
-    for i in range(numStock):
-        print("----------------------------------------")
-        print("PER: ", instMarketEye.GetDataValue(0, i))
-        print("EPS: ", instMarketEye.GetDataValue(1, i))
-        print("최근분기년월: ", instMarketEye.GetDataValue(2, i))
-        print("----------------------------------------")
 
 if __name__ == "__main__":
     instCpCodeMgr = win32com.client.Dispatch("CpUtil.CpCodeMgr")
@@ -34,15 +34,14 @@ if __name__ == "__main__":
     # 13 전기전자
     # 145 정보기술
 
-    print(instCpCodeMgr.GetIndustryName(13))
+    print(instCpCodeMgr.GetIndustryName(145))
     print("정보")
-    electCodeList = instCpCodeMgr.GetGroupCodeList(13)
+    electCodeList = instCpCodeMgr.GetGroupCodeList(145)
 
-    for code in range(electCodeList):
+    for i, code in enumerate(electCodeList):
         print("-----------------------------------------")
         print(code, instCpCodeMgr.CodeToName(code))
-        PrintCalList(instCpCodeMgr,code)
-        print("-----------------------------------------")
+        PrintCalList(instMarketEye, code)
 
 
 
